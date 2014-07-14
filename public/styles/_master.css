@@ -1,0 +1,29 @@
+
+ul li {
+	list-style: none;
+	font-weight: 100;
+	float: left;
+	width: 20%;
+	height: 101px;
+	text-align: center;
+	margin-top: 20px;	
+}
+ul li a img {
+	width: 40%;
+	text-align: left;
+}
+a:link {
+	color: #fe4b3e;
+	text-decoration: none;
+}
+a:visited {
+	color: #fe4b3e;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: 400;
+}
+a:active {
+	color: #fe4b3e;
+	text-decoration: none;
+}
