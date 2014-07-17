@@ -21,7 +21,7 @@ Route::get('/', function()
 Route::get('/ipsum', function()
 {	
 	
-	$var = new ipsum('files/adjectivelist.txt', 48);
+	$var = new ipsum('files/adjectivelist.txt', 48, 4);
 		$var->init_array();
 		$var->generate_random_paragraph();
 		$var2 = $var->get_paragraphs();

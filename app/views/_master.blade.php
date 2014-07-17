@@ -25,5 +25,6 @@
 			<li><a href="/clip">Clip Holder</a></li>
 		</ul>
 		@yield('body')
+		<p class="copyright">Lukas Metlicka ~ he made this!</p>
 	</body>
 </html>

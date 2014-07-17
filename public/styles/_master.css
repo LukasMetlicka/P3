@@ -27,3 +27,8 @@ a:active {
 	color: #fe4b3e;
 	text-decoration: none;
 }
+.copyright {
+	position: fixed;
+	float: right;
+	top: 95%;
+}
