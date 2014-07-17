@@ -1,5 +1,5 @@
 <?php
-class randomUser extends password {
+class randomuser extends password {
 
 	public $firstName;
 	

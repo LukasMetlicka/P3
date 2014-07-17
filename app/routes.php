@@ -31,14 +31,15 @@ Route::get('/ipsum', function()
 
 Route::get('/user', function()
 {
-	$uservar = new randomUser;
+	$uservar = new randomuser;
 	
 		$uservar1 = $uservar->export_firstName();
 		$uservar2 = $uservar->export_lastName();
 		$uservar3 = $uservar->export_userName();
 		$uservar4 = $uservar->export_password();
 		echo($uservar1);
-	return View::make('user')->with(
+		die();
+		return View::make('user')->with(
 						'firstName', $uservar1 );
 });
 
