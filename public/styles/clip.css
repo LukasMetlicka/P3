@@ -1,0 +1,11 @@
+div h1 {
+	font-size: 200%;
+	color: white;
+}
+div {
+	background-color: #fe4b3e;
+	float: left;
+	display: block;
+	padding: 10px;
+	margin-top: 20px;
+}

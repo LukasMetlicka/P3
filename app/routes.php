@@ -48,13 +48,18 @@ Route::get('/user', function()
 										->with('password', $uservar4 );
 });
 
-Route::get('/password/{length}', function($length) 
+//PASSWORD
+Route::get('/password', function() 
 {
 	
-
-	return View::make('password')->with('password',$password);
+	$passvar = new password;
+	
+		$passvar1 = $passvar->export_password();
+		
+	return View::make('password')->with('password',$passvar1 );
 });
 
+//CLIP
 Route::get('/clip', function()
 {
 	return View::make('clip');
