@@ -1,5 +1,5 @@
 <?php
-class randomuser extends password {
+class randomuser {
 
 	public $firstName;
 	
@@ -35,6 +35,10 @@ class randomuser extends password {
 		global $userName;
 		return $userName;
 	}
+	public function get_password() {
+		global $password;
+		return $password;
+	}
 	
 	
 	//SETTERS
@@ -55,6 +59,14 @@ class randomuser extends password {
 	}
 	public function loadPasswordArray() {
 		$passwordArray = file('files/wordlist.txt');
+	}
+	public function loadWordList() {
+		global $wordList;
+		$wordList = file('files/wordlist.txt');
+	}
+	public function get_wordList() {
+		global $wordList;
+		return $wordList;
 	}
 	
 	//LOGIC
@@ -114,6 +126,22 @@ class randomuser extends password {
 			$userName = $firstName.$partOfLastName;
 		}
 	}
+	public function generate_randomPassword() {
+		global $password;
+		$this->loadWordList();
+		$wordList = $this->get_wordList();
+		$randomNumberArray = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+		$randomNumberIndex = array_rand($randomNumberArray, 1 );
+		$randomNumber = $randomNumberArray[$randomNumberIndex];
+		
+		
+		$randomWord = array_rand($wordList);
+		$randomPassWord = $wordList[$randomWord];
+		$password = $randomPassWord.$randomNumber;
+		
+	}
+	
+	
 	//IMPORTER
 	public function import_password() {
 		$password = $this->export_password();
@@ -138,8 +166,10 @@ class randomuser extends password {
 		return $userName;
 	}
 	public function export_password() {
-		$password = $this->import_password();
+		$this->generate_randomPassword();
+		$password = $this->get_password();
 		return $password;
 	}
+	
 	
 }

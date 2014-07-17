@@ -11,24 +11,26 @@
 |
 */
 
-
+//HOME
 Route::get('/', function()
 {
 	return View::make('home');
 });
 
+//IPSUM
 Route::get('/ipsum', function()
 {	
 	
-	$var = new ipsum('files/adjectivelist.txt', 18);
+	$var = new ipsum('files/adjectivelist.txt', 48);
 		$var->init_array();
-		$var->generate_random_sentence();
+		$var->generate_random_paragraph();
 		$var2 = $var->get_paragraphs();
 	
 	
 	return View::make('ipsum')->with( 'text', $var2 );
 });
 
+//USER
 Route::get('/user', function()
 {
 	$uservar = new randomuser;
@@ -36,11 +38,14 @@ Route::get('/user', function()
 		$uservar1 = $uservar->export_firstName();
 		$uservar2 = $uservar->export_lastName();
 		$uservar3 = $uservar->export_userName();
+		
 		$uservar4 = $uservar->export_password();
-		echo($uservar1);
-		die();
-		return View::make('user')->with(
-						'firstName', $uservar1 );
+		
+		
+		return View::make('randomuser')->with('firstName', $uservar1)
+										->with( 'lastName', $uservar2)
+										->with('userName', $uservar3)
+										->with('password', $uservar4 );
 });
 
 Route::get('/password/{length}', function($length) 
@@ -54,6 +59,8 @@ Route::get('/clip', function()
 {
 	return View::make('clip');
 });
+
+//DISTRACTION
 Route::get('/distraction', function()
 {
 	$options =  array('cookies',"puppies","kittens","blankets","rainbows","baking","rain");

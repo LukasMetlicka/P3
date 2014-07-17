@@ -17,8 +17,9 @@ class ipsum {
 	public $numberOfParagraphs;
 	
 	//CONSTRUCTORS
-	public function __construct( $path ) {
+	public function __construct( $path, $wordsPerParagraph ) {
 		$this->set_path($path);
+		$this->specify_wordsPerParagraph($wordsPerParagraph);
 	}
 	
 	
@@ -50,9 +51,15 @@ class ipsum {
 		$numberOfParagraphs = array("","","","","");
 		foreach ($numberOfParagraphs as $whatever) {
 			global $text;
-			$text .= $this->generate_random_sentence()."<br></br>";
+			$text .= $this->get_randomParagraph()."<br></br>";
 		}
 		return $text;
+	}
+	public function get_wordsPerParagraph() {
+		return $this->wordsPerParagraph;
+	}
+	public function get_randomParagraph() {
+		return $this->generate_random_paragraph();
 	}
 	
 	//SETTERS
@@ -63,6 +70,9 @@ class ipsum {
 	public function set_numberOfParagraphs() {
 		$numberOfParagraphs = array_fill(0, 4, 'poop');
 	}
+	public function specify_wordsPerParagraph($ammount) {
+		$this->wordsPerParagraph = $ammount;
+	}
 	
 	
 	//GENERATORS
@@ -72,13 +82,14 @@ class ipsum {
 		$this->wordlist = $wordlist;
 	}	
 	
-	public function generate_random_sentence() {
+	public function generate_random_paragraph() {
+		$wordsPerParagraph = $this->get_wordsPerParagraph();
 		global $rand_keys;
 		global $endmark;
-		$endmark = array('.',"?","!","","","","");
+		$endmark = array('.  ',"?  ","!  ","","","","");
 		$mylist = $this->get_array();
-		$rand_keys = array_rand($mylist, 80);
-		$rand = array_slice($rand_keys, -80);
+		$rand_keys = array_rand($mylist, $wordsPerParagraph);
+		$rand = array_slice($rand_keys, -$wordsPerParagraph);
 		
 		foreach ($rand as $number) {
 			global $wordlist;
