@@ -1,5 +1,9 @@
 @extends("_master")
 
+@section("head")
+	<link rel="stylesheet" type="text/css"href="styles/ipsum.css">
+@stop
+
 @section("body")
-{{ $text }}
+	<div class="text">{{ $text }}</div>
 @stop

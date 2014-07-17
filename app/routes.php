@@ -18,59 +18,33 @@ Route::get('/', function()
 });
 
 Route::get('/ipsum', function()
-{
-	$wordlist = file('files/adjectivelist.txt');
+{	
+	
+	$var = new ipsum('files/adjectivelist.txt', 18);
+		$var->init_array();
+		$var->generate_random_sentence();
+		$var2 = $var->get_paragraphs();
 	
 	
-	
-	$total = count($wordlist);
-	$num_of_paragraphs = 4;
-	$i = 0;
-	$sentance = "";
-	$paragraph = "";
-	$text = "";
-	$grammar = array(",",";",":","#");
-	$end = array(".","?","!");
-	while ($i < $num_of_paragraphs) {
-		for ($o = 0; $o < 11; $o++) {
-			$sentance .= " ".$wordlist[rand(0,$total)];
-			stripcslashes($sentance);		
-			}
-			$paragraph .= $sentance.$end[rand(0,2)];
-		}
-		echo($paragraph);
-		die();
-		$text .= $paragraph."<br>";
-	}
-	return View::make('ipsum');
+	return View::make('ipsum')->with( 'text', $var2 );
 });
 
 Route::get('/user', function()
 {
-	$malenames = File::get("files/malename.txt");
-	$femalenames = File::get("files/femalename.txt");
-	$malenamelength = count($malenames);
-	$femalenamelength = count($femalenames);
-	$gender = rand(0,1);
-	if ($gender == 0) {
-		$username = $malenames[rand(0,$malenamelength)].$malenames[rand(0,$malenamelength)]; 
-	} elseif ( $gender == 1 ) {
-		$username = $femalenames[rand(0, $femalenamelength)].$malenames[rand(0,$malenamelength)];
-	}
-	$password = password(4);
-	return View::make('user');
+	$uservar = new randomUser;
+	
+		$uservar1 = $uservar->export_firstName();
+		$uservar2 = $uservar->export_lastName();
+		$uservar3 = $uservar->export_userName();
+		$uservar4 = $uservar->export_password();
+		echo($uservar1);
+	return View::make('user')->with(
+						'firstName', $uservar1 );
 });
 
 Route::get('/password/{length}', function($length) 
 {
-	$passwordlist = File::get('files/wordlist.txt');
-	$length = 0;
-	$password = '';
-	while ( $length < 4 ) {
-		$word = $passwordlist[rand(0,109582)];
-		$password = $password.$word;
-		$i++;
-	}
+	
 
 	return View::make('password')->with('password',$password);
 });
@@ -78,4 +52,12 @@ Route::get('/password/{length}', function($length)
 Route::get('/clip', function()
 {
 	return View::make('clip');
+});
+Route::get('/distraction', function()
+{
+	$options =  array('cookies',"puppies","kittens","blankets","rainbows","baking","rain");
+	$random = $options[rand(0,6)];
+	$final = "https://www.google.com/search?q=".$random."&source=lnms&tbm=isch&sa=X&ei=dLrGU5WMGcKeyASI9IGwBg&ved=0CAYQ_AUoAQ&biw=1440&bih=735";
+	
+	return Redirect::to( $final );
 });
